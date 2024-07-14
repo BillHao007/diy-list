@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import { Menu } from 'antd';
+import { Routes, Route, Link } from 'react-router-dom';
+import { UnorderedListOutlined, InboxOutlined } from '@ant-design/icons';
+import Equipment from './pages/Equipments/Equipments';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="side-bar">
+        <Menu
+          style={{ height: '100%' }}
+          defaultSelectedKeys={['list']}
+          items={[
+            {
+              key: 'list',
+              label: <Link to="/list">配置清单</Link>,
+              icon: <UnorderedListOutlined />
+            },
+            {
+              key: 'repo',
+              label: <Link to="/repo">配置仓库</Link>,
+              icon: <InboxOutlined />, 
+            }
+          ]}
+        />
+      </div>
+      <div className="page-container">
+        <Routes>
+          <Route path="/" element={<Equipment />} />
+          <Route path="/list" element={<div>配置清单</div>} />
+          <Route path="/repo" element={<div>配置仓库</div>} />
+        </Routes>
+      </div>
     </div>
   );
 }
